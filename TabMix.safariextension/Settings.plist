@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>Key</key>
+		<string>resize_whitelist</string>
+		<key>Title</key>
+		<string>Resize tab for these domains (keep blank to resize any domain except below)</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>search.yahoo.com www.google.com www.bing.com www.baidu.com duckduckgo.com</string>
+		<key>Key</key>
+		<string>resize_blacklist</string>
+		<key>Title</key>
+		<string>Do not resize tab for these domains</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<true/>
+		<key>Key</key>
+		<string>resize_once</string>
+		<key>Title</key>
+		<string>Do not resize when there're existing tabs in a window</string>
+		<key>Type</key>
+		<string>CheckBox</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string>www.facebook.com</string>
+		<key>Key</key>
+		<string>move_whitelist</string>
+		<key>Title</key>
+		<string>Group tab for these domains (keep blank to group any domain except below)</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<string></string>
+		<key>Key</key>
+		<string>move_blacklist</string>
+		<key>Title</key>
+		<string>Do not group tab for these domains</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+	<dict>
+		<key>DefaultValue</key>
+		<real>0.0</real>
+		<key>Key</key>
+		<string>last_version</string>
+		<key>Title</key>
+		<string>Last Installed Version (Debug)</string>
+		<key>Type</key>
+		<string>TextField</string>
+	</dict>
+</array>
+</plist>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+<!--script type="text/javascript" src="debug.js"></script-->
+
+<script type="text/javascript">
+var debug = 1 ? console : {log:function(){}};
+var settings = {};
+function reload_settings() {
+	["resize_blacklist", "resize_whitelist", "move_blacklist", "move_whitelist"].forEach(function(k){
+		var s = safari.extension.settings[k];
+		settings[k] = (!!s) ? new RegExp("(" + s.replace(/^([\s;,]+)/, "").replace(/([\s;,]+)$/, "").replace(/([\s;,]+)/g, "|") + ")$") : null;
+	});
+	debug.log("Settings loaded: %o", settings);
+}
+reload_settings();
+safari.extension.settings.addEventListener("change", reload_settings, false);
+
+function window_for_domain(domain, except_tab) {
+	var r = null;
+	safari.application.browserWindows.forEach(function(w, i, ws){
+		w.tabs.forEach(function(t, j, ts){
+			if (t != except_tab && !!t.url) {
+				var d = t.url.match(/^(\w+):\/\/([\w\.]+).*/);
+				if (d && domain == d[2]) r = w;
+			}
+		});
+	});
+	return r;
+}
+
+function is_only_tab(t) {
+	var r = true;
+	t.browserWindow.tabs.forEach(function(tab){
+		if (tab != t && !!tab.url) r = false;
+	});
+	return r;
+}
+
+function get_domain(url) {
+	var domain = url.match(/^(\w+):\/\/([\w\.]+).*/);
+	return domain ? domain[2] : null; 
+}
+
+safari.application.addEventListener("navigate", function(event){
+	var domain = get_domain(event.target.url);
+	if (!domain) return;
+	var w = window_for_domain(domain, event.target);
+	debug.log("onNavigate: %o %o %o", domain, event, w);
+	if (w==event.target.browserWindow) return;
+	var to_resize = (!settings.resize_whitelist || domain.match(settings.resize_whitelist)) && (!settings.resize_blacklist || !domain.match(settings.resize_blacklist));
+	var to_move = (!settings.move_whitelist || domain.match(settings.move_whitelist)) && (!settings.move_blacklist || !domain.match(settings.move_blacklist));
+	if (to_move && !is_only_tab(event.target)) {
+		var activeW = safari.application.activeBrowserWindow;
+		var wasActive = activeW && event.target == activeW.activeTab;
+		if (!w) {
+			w = safari.application.openBrowserWindow();
+			w.insertTab(event.target);
+			w.tabs.forEach(function(element, index, array){
+				if (element != event.target) element.close();
+			})
+		} else {
+			w.insertTab(event.target);
+		}
+		if (wasActive) {
+			activeW = event.target.browserWindow;
+		}
+		if (safari.application.activeBrowseWindow != activeW) {
+			activeW.activate();
+		}
+	}
+	if (to_resize && (!safari.extension.settings.resize_once || is_only_tab(event.target))) {
+		var d = JSON.parse(localStorage.getItem(domain));
+		if (d) event.target.page.dispatchMessage("wo-setsize", d);
+	}
+}, false);
+
+safari.application.addEventListener("message", function(event){
+	if (event.name == "wo-resized" && event.message) {
+		var domain = get_domain(event.target.url);
+		if (domain && (!settings.resize_whitelist || domain.match(settings.resize_whitelist)) && (!settings.resize_blacklist || !domain.match(settings.resize_blacklist))) {
+			debug.log("store size for domain: %o", domain);
+			localStorage.setItem(domain, JSON.stringify(event.message));
+		}
+	}
+}, false);
+
+</script>
+</html>
