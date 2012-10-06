@@ -9,7 +9,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Tab Mix</string>
 	<key>CFBundleIdentifier</key>
-	<string>org.rollingcode.app.safaritabmix</string>
+	<string>org.rollingcode.app.safari.tabmix</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleShortVersionString</key>
@@ -19,7 +19,7 @@
 	<key>Chrome</key>
 	<dict>
 		<key>Database Quota</key>
-		<real>10485760</real>
+		<real>52428800</real>
 		<key>Global Page</key>
 		<string>global.html</string>
 	</dict>
@@ -47,6 +47,8 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>https://nodeload.github.com/freewizard/SafariTabMix/master/Update.plist</string>
 	<key>Website</key>
 	<string>http://www.rollingcode.org/</string>
 </dict>

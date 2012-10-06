@@ -6,7 +6,7 @@
 		<key>Key</key>
 		<string>resize_whitelist</string>
 		<key>Title</key>
-		<string>Resize tab for these domains (keep blank to resize any domain except below)</string>
+		<string>Resize tab for</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
@@ -16,7 +16,7 @@
 		<key>Key</key>
 		<string>resize_blacklist</string>
 		<key>Title</key>
-		<string>Do not resize tab for these domains</string>
+		<string>Do not resize for</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
@@ -26,7 +26,7 @@
 		<key>Key</key>
 		<string>resize_once</string>
 		<key>Title</key>
-		<string>Do not resize when there're existing tabs in a window</string>
+		<string>Do not resize when there're other tabs in a window</string>
 		<key>Type</key>
 		<string>CheckBox</string>
 	</dict>
@@ -36,7 +36,7 @@
 		<key>Key</key>
 		<string>move_whitelist</string>
 		<key>Title</key>
-		<string>Group tab for these domains (keep blank to group any domain except below)</string>
+		<string>Group tab for</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
@@ -46,7 +46,7 @@
 		<key>Key</key>
 		<string>move_blacklist</string>
 		<key>Title</key>
-		<string>Do not group tab for these domains</string>
+		<string>Do not group for</string>
 		<key>Type</key>
 		<string>TextField</string>
 	</dict>
@@ -58,7 +58,7 @@
 		<key>Title</key>
 		<string>Last Installed Version (Debug)</string>
 		<key>Type</key>
-		<string>TextField</string>
+		<string>Hidden</string>
 	</dict>
 </array>
 </plist>
