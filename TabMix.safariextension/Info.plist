@@ -48,7 +48,7 @@
 		</dict>
 	</dict>
 	<key>Update Manifest URL</key>
-	<string>https://nodeload.github.com/freewizard/SafariTabMix/master/Update.plist</string>
+	<string>https://raw.github.com/freewizard/SafariTabMix/master/Update.plist</string>
 	<key>Website</key>
 	<string>http://www.rollingcode.org/</string>
 </dict>
